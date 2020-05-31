@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import random
 import sys
 
@@ -7,10 +8,13 @@ import bestiary
 
 class GameMechanism:
     @classmethod
-    def dice_roll(cls, size: int):
-        """Return ..."""
+    def dice_roll(cls, size: int, repetition=1):
+        """Return dice roll on given dice and roll repetition"""
         possibilities = list(range(1, size+1))
-        return random.choice(possibilities)
+        result = 0
+        for i in range(repetition):
+            result += random.choice(possibilities)
+        return result
 
     @classmethod
     def hero_creation(cls):
@@ -46,7 +50,7 @@ class Combat:
         """Function will remove all combat participants with actual_hp < 0"""
         for entity in self.participants:
             if entity.actual_hp <= 0:
-                print("entity", entity, "removed")
+                print("entity", entity.name, "removed")
                 self.participants.remove(entity)
 
     # ATTACK RELATED METHODS
